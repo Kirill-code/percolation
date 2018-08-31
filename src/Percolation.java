@@ -1,16 +1,12 @@
-package src;
-
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private boolean[][] grid; // grid[i][j] = site at row i, column j
-    private int gridSide; // gridSide of the grid
-    private int top = 0; // virtual top
-    private int bottom; // virtual bottom
-    private WeightedQuickUnionUF uf; // a WeightedQuickUnionUF instance
+    private final int gridSide; // gridSide of the grid
+    private final int top = 0; // virtual top
+    private final int bottom; // virtual bottom
+    private final WeightedQuickUnionUF uf; // a WeightedQuickUnionUF instance
 
     /**
      * Create a n-by-n grid, with all sites blocked
@@ -50,7 +46,23 @@ public class Percolation {
             uf.union(getIndex(i, j), getIndex(i, j + 1));
         }
     }
+    /**
+     * Count if site (row i, column j) open?
+     *
+     * @return number of open sites
+     */
 
+    public     int numberOfOpenSites(){
+        int open=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[i].length;j++){
+                if(grid[i][j]){
+                    open++;
+                }
+            }
+        }
+        return open;
+    }
     /**
      * Is site (row i, column j) open?
      *
